@@ -18,3 +18,9 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::view('/preview-daftar-email', 'auth.register-email');
+Route::view('/preview-daftar-sandi', 'auth.register-password');
+Route::view('/preview-otp', 'auth.verify-otp');
+Route::view('/preview-daftar-profil', 'auth.register-profile');
+Route::view('/preview-login', 'auth.login');
