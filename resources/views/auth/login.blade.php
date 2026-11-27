@@ -21,7 +21,7 @@
         <div class="w-full max-w-md flex flex-col items-start">
             {{-- Maskot rata kiri sejajar dengan input email --}}
             <img
-                src="{{ asset('images\Doodle masuk.png') }}"
+                src="{{ asset('images/Doodle masuk.png') }}"
                 alt="Maskot Masuk"
                 class="w-18 h-18 object-contain mb-1.5"
             >
@@ -88,14 +88,14 @@
                 </div>
             </form>
 
-            @if (Route::has('register'))
-                <p class="w-full mt-5 text-[14px] text-[#2C3E50] text-center">
-                    Belum punya akun?
-                    <a href="{{ route('register') }}" class="font-semibold underline underline-offset-2 hover:text-slate-900">
-                        Daftar
-                    </a>
-                </p>
-            @endif
+            <p class="w-full mt-5 text-[14px] text-[#2C3E50] text-center">
+                Belum punya akun?
+                <a 
+                    href="{{ Route::has('register') ? route('register') : url('/preview-daftar-email') }}" 
+                    class="font-semibold underline underline-offset-2 hover:text-slate-900">
+                    Daftar
+                </a>
+            </p>
         </div>
     </main>
 </body>
