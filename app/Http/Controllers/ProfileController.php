@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules\Password;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
@@ -45,7 +43,9 @@ class ProfileController extends Controller
             'email.unique' => 'Email ini sudah digunakan oleh akun lain.',
         ]);
 
-        $user->fill($validated);
+        // Pastikan hanya name dan email yang diperbarui (role aman)
+        $user->name = $validated['name'];
+        $user->email = $validated['email'];
 
         if ($user->isDirty('email')) {
             $user->email_verified_at = null;
@@ -54,28 +54,5 @@ class ProfileController extends Controller
         $user->save();
 
         return redirect()->route('profile.edit')->with('status', 'profile-updated');
-    }
-
-    /**
-     * Memperbarui password akun pengguna.
-     */
-    public function updatePassword(Request $request): RedirectResponse
-    {
-        $validated = $request->validate([
-            'current_password' => ['required', 'current_password'],
-            'password' => ['required', Password::defaults(), 'confirmed'],
-        ], [
-            'current_password.required' => 'Password saat ini wajib diisi.',
-            'current_password.current_password' => 'Password saat ini tidak sesuai.',
-            'password.required' => 'Password baru wajib diisi.',
-            'password.min' => 'Password baru minimal terdiri dari 8 karakter.',
-            'password.confirmed' => 'Konfirmasi password baru tidak cocok.',
-        ]);
-
-        $request->user()->update([
-            'password' => Hash::make($validated['password']),
-        ]);
-
-        return redirect()->route('profile.edit')->with('status', 'password-updated');
     }
 }

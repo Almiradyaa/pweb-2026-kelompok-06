@@ -97,7 +97,7 @@
             </form>
         </section>
 
-        <!-- Card 2: Ubah Password -->
+        <!-- Card 2: Ubah Password (Menggunakan Rute Bawaan Breeze: PUT /password) -->
         <section class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200">
             <div class="mb-6">
                 <h2 class="text-lg font-semibold text-slate-900">Ubah Password</h2>
@@ -110,7 +110,7 @@
                 </div>
             @endif
 
-            <form method="POST" action="{{ route('profile.password.update') }}" class="space-y-5">
+            <form method="POST" action="{{ route('password.update') }}" class="space-y-5">
                 @csrf
                 @method('PUT')
 
@@ -123,7 +123,7 @@
                         required
                         class="w-full rounded-xl border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm"
                     >
-                    @error('current_password')
+                    @error('current_password', 'updatePassword')
                         <p class="mt-1.5 text-xs text-rose-600 font-medium">{{ $message }}</p>
                     @enderror
                 </div>
@@ -137,7 +137,7 @@
                         required
                         class="w-full rounded-xl border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm"
                     >
-                    @error('password')
+                    @error('password', 'updatePassword')
                         <p class="mt-1.5 text-xs text-rose-600 font-medium">{{ $message }}</p>
                     @enderror
                 </div>
@@ -151,6 +151,9 @@
                         required
                         class="w-full rounded-xl border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm"
                     >
+                    @error('password_confirmation', 'updatePassword')
+                        <p class="mt-1.5 text-xs text-rose-600 font-medium">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div class="flex justify-end pt-2">
