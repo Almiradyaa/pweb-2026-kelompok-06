@@ -24,19 +24,19 @@ Route::view('/preview-daftar-sandi', 'auth.register-password');
 Route::view('/preview-otp', 'auth.verify-otp');
 Route::view('/preview-daftar-profil', 'auth.register-profile');
 Route::view('/preview-login', 'auth.login');
-Route::view('/preview-landing', 'landing');
-Route::view('/preview-katalog', 'catalog');
+Route::view('/preview-landing', 'anggota.landing');
+Route::view('/preview-katalog', 'anggota.catalog');
 
 Route::get('/preview-antre', function () {
-    return view('pinjam-detail', ['status' => 'antre']);
+    return view('anggota.pinjam-detail', ['status' => 'antre']);
 });
 
 Route::get('/preview-dipinjam', function () {
-    return view('pinjam-detail', ['status' => 'dipinjam']);
+    return view('anggota.pinjam-detail', ['status' => 'dipinjam']);
 });
 
 Route::get('/preview-detail-buku', function () {
-    return view('detail-buku');
+    return view('anggota.detail-buku');
 });
 
 Route::get('/preview-detail-antre/{slug?}', function (?string $slug = 'beautiful-boy') {
@@ -101,8 +101,35 @@ Route::get('/preview-detail-antre/{slug?}', function (?string $slug = 'beautiful
         ],
     ];
 
-    return view('detail-buku', [
+    return view('anggota.detail-buku', [
         'book' => $selectedBook,
         'similarBooks' => $similarBooks,
     ]);
+});
+
+Route::get('/preview-baca-buku', function () {
+    return view('anggota.baca-buku', [
+        'bookTitle' => 'Baca E-Book',
+        'pdfUrl' => asset('books/sample-books.pdf'),
+        'initialPage' => 1,
+        'backUrl' => url('/preview-dipinjam'),
+    ]);
+});
+
+Route::get('/preview-pustakawan-verifikasi', function () {
+    return view('pustakawan.verifikasi', [
+        'adminName' => 'Admin007',
+    ]);
+});
+
+Route::get('/preview-pustakawan-pengaturan', function () {
+    return view('pustakawan.pengaturan');
+});
+
+Route::get('/preview-pustakawan-ubah-profil', function () {
+    return view('pustakawan.ubah-profil');
+});
+
+Route::get('/preview-pustakawan-ubah-email', function () {
+    return view('pustakawan.ubah-email');
 });
