@@ -19,6 +19,21 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
+Route::middleware(['auth', 'verified'])->group(function () {
+
+    // Khusus pustakawan
+    Route::middleware('role:pustakawan')->prefix('admin')->name('admin.')->group(function () {
+        // nanti: resource penulis, anggota, buku (#12, #13)
+
+    });
+
+    // Khusus anggota
+    Route::middleware('role:anggota')->group(function () {
+        // nanti: pengajuan peminjaman (#16)
+
+    });
+});
+
 Route::view('/preview-daftar-email', 'auth.register-email');
 Route::view('/preview-daftar-sandi', 'auth.register-password');
 Route::view('/preview-otp', 'auth.verify-otp');
