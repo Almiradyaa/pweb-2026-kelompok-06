@@ -49,6 +49,16 @@ class User extends Authenticatable
         ];
     }
 
+    public function isPustakawan(): bool
+    {
+    return $this->role === 'pustakawan';
+    }
+
+    public function isAnggota(): bool
+    {
+    return $this->role === 'anggota';
+    }
+
     /**
      * Get the anggota profile associated with the user.
      */
