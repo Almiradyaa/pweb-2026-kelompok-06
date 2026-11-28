@@ -4,8 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Buku extends Model
 {
@@ -25,18 +23,18 @@ class Buku extends Model
     ];
 
     /**
-     * Get the author of the book.
+     * Relasi ke entitas Penulis (Many-to-One)
      */
-    public function penulis(): BelongsTo
+    public function penulis()
     {
-        return $this->belongsTo(Penulis::class);
+        return $this->belongsTo(Penulis::class, 'penulis_id');
     }
 
     /**
-     * Get the borrowing records for the book.
+     * Relasi ke entitas Peminjaman (One-to-Many)
      */
-    public function peminjaman(): HasMany
+    public function peminjaman()
     {
-        return $this->hasMany(Peminjaman::class);
+        return $this->hasMany(Peminjaman::class, 'buku_id');
     }
 }

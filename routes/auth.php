@@ -59,3 +59,11 @@ Route::middleware('auth')->group(function () {
 });
 
 // Rute untuk menampilkan halaman Verifikasi OTP Route::get('/verify-otp', function () { return view('auth.verify-otp'); })-&gt;name('otp.verify.view'); // Rute proses verifikasi OTP (akan dihubungkan ke controller oleh Tim Backend) Route::post('/verify-otp', [AuthenticatedSessionController::class, 'verifyOtp'])-&gt;name('otp.verify'); Route::post('/resend-otp', [AuthenticatedSessionController::class, 'resendOtp'])-&gt;name('otp.resend');
+// Rute untuk menampilkan halaman Verifikasi OTP
+Route::get('/verify-otp', function () {
+    return view('auth.verify-otp');
+})->name('otp.verify.view');
+
+// Rute proses verifikasi OTP
+Route::post('/verify-otp', [AuthenticatedSessionController::class, 'verifyOtp'])->name('otp.verify');
+Route::post('/resend-otp', [AuthenticatedSessionController::class, 'resendOtp'])->name('otp.resend');
